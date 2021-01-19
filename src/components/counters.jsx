@@ -23,6 +23,14 @@ class Counters extends Component {
     //      );
     // }
 
+    handleIncrement= (counterId) => {
+        const counters = [...this.state.counters];
+        counters[counterId-1].value++;//This is wrong in react - directly modifing the state 
+        //console.log("on increment called",counterId," dsdsdsds    ",counters);
+        // console.log(this.state.counters[0]);
+        this.setState({counters});
+    }
+
     handleDelete = (counterId) => {
         const counters = this.state.counters.filter(c => c.id!==counterId);
         console.log(">>>> ",counters);
@@ -59,7 +67,11 @@ class Counters extends Component {
             <div>
                 <button onClick={this.handleReset} className="btn btn-primary btn-sm m-2">Reset</button>
                 {this.state.counters.map(counter => 
-                    <Counter key={counter.id} onDelete={()=>this.handleDelete(counter.id)} counter={counter}>
+                    <Counter 
+                        key={counter.id} 
+                        onDelete={ () => this.handleDelete(counter.id)} 
+                        onIncrement={() => this.handleIncrement(counter.id)}
+                        counter={counter}>
                         <h4>Title</h4>
                     </Counter>
                     )

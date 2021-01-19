@@ -7,12 +7,13 @@ class Counter extends Component {
     //     // ,imageURL : 'https://picsum.photos/200'
     // };
     
+    //Removed the local state 
     //State after Counters.jsx and props introduction
-    state = { 
-        //Changes after sending complete counter object 
-        count : this.props.counter.value, //count : this.props.value,//
-        tags:['tag1','tag2','tag3']
-    };
+    // state = { 
+    //     //Changes after sending complete counter object 
+    //     count : this.props.counter.value, //count : this.props.value,//
+    //     tags:['tag1','tag2','tag3']
+    // };
 
     //State after Counters.jsx and props introduction
     constructor(props){
@@ -62,7 +63,7 @@ class Counter extends Component {
                 {/*In javascript you can apply logical and operator between non boolean values*/}
                 <br/>
                 <span className={this.formatClasses()}>{this.formatCount()}</span>
-                <button onClick={() => this.handleIncrement()} className='btn btn-secondary btn-sm'>Increment</button>
+                <button onClick={()=>this.props.onIncrement(this.props.counters)} className='btn btn-secondary btn-sm'>Increment</button>
                 <button onClick={this.props.onDelete} className="btn btn-danger btn-sm m-2">Delete</button>
             </React.Fragment>
         );
@@ -74,34 +75,36 @@ class Counter extends Component {
     // }
 
     //or 1st way
-    handleIncrement = () => {
-        //this.props.value = 100;//Props are read-only you cannot assign a new value to it
-        //this.state.count++;//its incrementing but react is not aware of it. to have this in React we have to use Component class's setState(), this is done automatically in angular because in angular all browser event are monkey patched, for react we have to explictly tell react what is changed.
-        this.setState({ count: this.state.count+1 });//React will schedule a call to render() method in future and this will be an asyc call.
+    // handleIncrement = () => {
+    //     //this.props.value = 100;//Props are read-only you cannot assign a new value to it
+    //     //this.state.count++;//its incrementing but react is not aware of it. to have this in React we have to use Component class's setState(), this is done automatically in angular because in angular all browser event are monkey patched, for react we have to explictly tell react what is changed.
+    //     this.setState({ count: this.state.count+1 });//React will schedule a call to render() method in future and this will be an asyc call.
 
-        console.log('Incremental Clicked :  ',this);
-    }
+    //     console.log('Incremental Clicked :  ',this);
+    // }
 
-    doHandleIncrement = () => {
-        this.handleIncrement()
-    }
+    // doHandleIncrement = () => {
+    //     this.handleIncrement()
+    // }
 
-    renderTags(){
-        if(this.state.tags.length === 0) {
-            return <p>There are no elements</p>;
-        }
-        return <ul> { this.state.tags.map(tagVar =>  <li key={tagVar}>{tagVar}</li>) }</ul>
-    }
+    //Removed after the controlled Component concept
+    // renderTags(){
+    //     if(this.state.tags.length === 0) {
+    //         return <p>There are no elements</p>;
+    //     }
+    //     return <ul> { this.state.tags.map(tagVar =>  <li key={tagVar}>{tagVar}</li>) }</ul>
+    // }
 
     formatClasses() {
         let classes = "badge m-2 badge-";
-        classes += this.state.count === 0 ? "warning" : "primary";
+        classes += this.props.counter.value === 0 ? "warning" : "primary";
         return classes;
     }
 
     formatCount(){
-        const {count} = this.state; 
-        return count === 0 ? 'Zero' : count; 
+        const {value} = this.props.counter; 
+        console.log();
+        return value === 0 ? 'Zero' : value; 
         //return this.state.count === 0 ? 'Zero' : this.state.count;
     }
     // render() { 
