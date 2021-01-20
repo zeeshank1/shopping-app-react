@@ -21,14 +21,15 @@ class Counters extends Component {
 
     //3rd way to send only single prop as counter
     render() { 
+        const { onReset, onIncrement, onDelete, counters} = this.props;
         return ( 
             <div>
-                <button onClick={this.props.onReset} className="btn btn-primary btn-sm m-2">Reset</button>
-                {this.props.counters.map(counter => 
+                <button onClick={onReset} className="btn btn-primary btn-sm m-2">Reset</button>
+                {counters.map(counter => 
                     <Counter 
                         key={counter.id} 
-                        onDelete={ () => this.props.onDelete(counter.id)} 
-                        onIncrement={() => this.props.onIncrement(counter.id)}
+                        onDelete={ () => onDelete(counter.id)} 
+                        onIncrement={() => onIncrement(counter.id)}
                         counter={counter}>
                         <h4>Title</h4>
                     </Counter>
