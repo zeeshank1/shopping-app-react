@@ -21,6 +21,7 @@ class Counters extends Component {
 
     //3rd way to send only single prop as counter
     render() { 
+        console.log('Counter(s) - Render called');
         const { onReset, onIncrement, onDelete, counters} = this.props;
         return ( 
             <div>

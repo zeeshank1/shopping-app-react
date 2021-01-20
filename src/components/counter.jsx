@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 
 class Counter extends Component {
+
+    componentDidUpdate(prevPros,prevState){
+        console.log("### Component Did Update called",prevPros," ...  ",prevState);
+    }
+
     // state = { 
     //     count : 0,
     //     tags:['tag1','tag2','tag3']
@@ -18,13 +23,17 @@ class Counter extends Component {
     //State after Counters.jsx and props introduction
     constructor(props){
         super(props);
-        console.log('This :',props);
-        console.log('This :',this);
+        
+        //console.log('This 1 :',props);
+        //console.log('This 2 :',this);
         this.props = props;
         //1. Old Way to bind this reference in case if it is missing : 
         //this.handleIncrement() = this.handleIncrement().bind(this);
 
         //2. Second way : to use arrow functions
+
+        // Cannot call this.setState() //Only called when component is called and rendered in DOM
+        // only : this.state = this.props //is possible 
         
     }
 //
@@ -44,11 +53,12 @@ class Counter extends Component {
     };
     
     render() {
+        console.log('Counter - Render called');
         //This is after 2nd way in Counters.jsx
-        console.log('Props : ',this.props);
+        // console.log('Props : ',this.props);
         
         // Our Virtual DOM is a tree with React Element on the top and children under it. react put virtual DOM and DOM, compare them, it will update the DOM with the change element only
-        let classes = this.formatClasses();
+        //let classes = this.formatClasses();
 
         //INFO : $r is the react element representation
         return (
@@ -103,7 +113,7 @@ class Counter extends Component {
 
     formatCount(){
         const {value} = this.props.counter; 
-        console.log();
+        // console.log();
         return value === 0 ? 'Zero' : value; 
         //return this.state.count === 0 ? 'Zero' : this.state.count;
     }
